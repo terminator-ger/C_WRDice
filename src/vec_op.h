@@ -63,7 +63,7 @@ static inline void vec_sub_to_0_hp(uint32_t* restrict left, uint32_t* restrict r
     }
 }
 
-static inline int vec_n_components(uint32_t* restrict left, int n){
+static inline int vec_n_components(const uint32_t* restrict left, int n){
     int cnt = 0; 
     for (int i = 0; i < n; i++){
         if (left[i] > 0){

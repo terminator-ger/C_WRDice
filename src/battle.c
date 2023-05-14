@@ -118,16 +118,16 @@ static void apply_batch_cap(const Army* restrict aa, const Army* restrict ab, in
     int unit_types_b = vec_n_components(ab->n_units_lnd, 3);
     switch(unit_types_a-unit_types_b){
         case 1:
-            CLIP((int)*dice_b, 0, 20);
+            *dice_b = MIN(*dice_b, 20);
             break;
         case 2:
-            CLIP((int)*dice_b, 0, 10);
+            *dice_b = MIN(*dice_b, 10);
             break;
         case -1:
-            CLIP((int)*dice_a, 0, 20);
+            *dice_a = MIN(*dice_a, 20);
             break;
         case -2:
-            CLIP((int)*dice_a, 0, 10);
+            *dice_a = MIN(*dice_a, 10);
             break;
     }
 }
