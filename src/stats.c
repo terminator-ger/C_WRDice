@@ -40,6 +40,20 @@ void udpate_statistics(const Army* restrict army_a, const Army* restrict army_b,
         update_max_size(&stats->army_a.stats_sea[tvpe], army_a->n_units_sea[tvpe]);
         update_max_size(&stats->army_b.stats_sea[tvpe], army_b->n_units_sea[tvpe]);
     }
+
+    // Win - Loss Distribution
+    bool surv_a = vec_n_components(army_a->n_units_lnd, 3) > 0 ? true : false;
+    bool surv_b = vec_n_components(army_b->n_units_lnd, 3) > 0 ? true : false;
+    if (surv_a && ! surv_b){
+        stats->br.win_a += 1;
+    }else if (!surv_a && surv_b){
+        stats->br.win_b += 1;
+    }else if (surv_a && surv_b){
+        stats->br.draw += 1;
+    }else if (!surv_a && !surv_b){
+        stats->br.death += 1;
+    }
+
 }
 
 

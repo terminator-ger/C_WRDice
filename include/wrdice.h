@@ -5,12 +5,12 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-struct BattleResult{
+typedef struct {
     float win_a;
     float win_b;
     float draw; 
     float death;
-};
+} BattleResult;
 
 typedef struct {
     uint32_t    size;
@@ -27,6 +27,7 @@ typedef struct{
 typedef struct{
     Stats army_a;
     Stats army_b;
+    BattleResult br;
 } SimStats;
 
 typedef struct{

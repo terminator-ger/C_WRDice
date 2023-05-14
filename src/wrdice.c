@@ -63,6 +63,10 @@ void run_simulation(const Army* restrict army_a,
     update_stats_counts(stats->army_b.stats_air, N);
     update_stats_counts(stats->army_b.stats_lnd, N);
     update_stats_counts(stats->army_b.stats_sea, N);
+    stats->br.win_a /= N;
+    stats->br.win_b /= N;
+    stats->br.draw  /= N;
+    stats->br.death /= N;
 
     print_stats(stats);
 }
