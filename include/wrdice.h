@@ -1,9 +1,24 @@
 #ifndef WR_DICE_H
 #define WR_DICE_H
 
-
 #include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
+
+#if _WIN32
+#include <windows.h>
+#else
+#include <pthread.h>
+#include <unistd.h>
+#endif
+
+#if _WIN32
+#define FFI_PLUGIN_EXPORT __declspec(dllexport)
+#else
+#define FFI_PLUGIN_EXPORT
+#endif
+
 
 typedef struct {
     float win_a;
@@ -44,6 +59,7 @@ typedef struct{
     Stance   stance_sea;
 } Army;
 
+
 typedef struct{
     uint32_t hp_stance_off[5];
     uint32_t hp_stance_def[5];
@@ -55,12 +71,26 @@ typedef struct{
     HP sea;
 } ArmyHP;
 
+typedef struct{
+    uint32_t vs_air[5];    
+    uint32_t vs_gnd[5];    
+} DiceDistribution;
 
-void run_simulation(const Army* restrict army_a, 
-                    const Army* restrict army_b, 
-                    SimStats*   restrict stats,
-                    bool                 with_force_advantage,
-                    bool                 with_batch_cap);
+typedef struct{
+    DiceDistribution air;
+    DiceDistribution lnd;
+    DiceDistribution sea;
+} Dice;
+
+FFI_PLUGIN_EXPORT void get_dice_for_army(const Army* army, Dice* dice);
+
+
+
+FFI_PLUGIN_EXPORT void run_simulation(const Army* restrict army_a, 
+                                      const Army* restrict army_b, 
+                                      SimStats*   restrict stats,
+                                      bool                 with_force_advantage,
+                                      bool                 with_batch_cap);
  
 
 #endif

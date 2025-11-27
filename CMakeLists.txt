@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)    # Set minimum version of CMake required
 project(C_WRDICE C)    # Set project name and language
 
 set(CMAKE_C_STANDARD 11)    # Set C standard
-set(LIB_NAME libwrdice)
+set(LIB_NAME wrdice)
 
 # Add source files to the project
 set(SRC 
